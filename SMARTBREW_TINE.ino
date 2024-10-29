@@ -49,7 +49,7 @@ const int Next = 3;   //Next Button
 const int Select = 4; //Next Button
 
 /*Variety of Coffee_LCD section*/
-const char* CoffeeVarieties[] = {"Black Coffee", "Caramel"};
+const char* CoffeeVarieties[] = {"Black Coffee", "Caramel", "Chocolate"};
 int selectedIndex = 0;
 
 /*WiFi SSID and PASSWORD*/
@@ -68,8 +68,9 @@ Servo Black_Coffee;      //Wemos pin no.2 or D2
 //D3 is SCL
 //D4 is SDA
 
-Servo Caramel_Coffee;    //Wemos pin no.3 or D5
-Servo Sugar;             //Wemos pin no.4 or D6
+Servo Caramel_Coffee;        //Wemos pin no.3 or D5
+Servo Chocolate;             //Wemos pin no.4 or D6
+//Servo Sugar;                 //Wemos pin no.
 
 /*Servo open*/
 const int BlackCoffeePosition = 90;     
@@ -115,9 +116,10 @@ void setup() {
   
   /*Coffee dropper mechanism section using Servo motor*/
   Cup.attach(13);              //Cup dropper
-  Black_Coffee.attach(2);     //Black coffee dropper
-  Caramel_Coffee.attach(5);   //3n1 coffee dropper
-  Sugar.attach(6);            //Sugar dropper
+  Black_Coffee.attach(2);      //Black coffee dropper
+  Caramel_Coffee.attach(5);    //Caramel dropper
+  Chocolate.attach(6);         //Chocolate dropper
+  //Sugar.attach();            //Sugar dropper
   
   /*pinMode section for Coffee dropper mechanism*/
   //pinMode(Hot_Water, OUTPUT);  //Water pump connected to Motor Driver
@@ -165,7 +167,7 @@ void loop() {
   
 /*If Next button is pressed*/
   if(digitalRead(Next) == LOW){
-    selectedIndex = (selectedIndex + 1) % 2; //Loop doon sa option
+    selectedIndex = (selectedIndex + 1) % 3; //Loop doon sa option
     displaySelection();
     delay(300);
   }
@@ -189,6 +191,7 @@ void loop() {
   //Cup.write(ServoClosed);
   //Black_Coffee.write(ServoClosed);
   //Caramel_Coffee.write(ServoClosed);
+  //Chocolate.write(180);
   //Sugar.write(ServoClosed);
 }
 void displaySelection(){
@@ -203,6 +206,10 @@ void serveCoffee(int index){
   Cup.write(180);
   delay(400);
   Cup.write(0);
+  delay(2000);
+
+
+  //I will add Stepper Motor code for this next line
 
   switch (index){
     // Black Coffee
@@ -211,15 +218,25 @@ void serveCoffee(int index){
       delay(500);                             //Pouring of Black Coffee
       Black_Coffee.write(ServoClosed);
       break;
+    //Caramel
     case 1:
       Caramel_Coffee.write(CaramelCoffeePosition);
       delay(500);                             //Pouring of Caramel
       Caramel_Coffee.write(ServoClosed);
       break;
+    //Chocolate 
+    case 2:
+      Chocolate.write(180);
+      delay(300);
+      Chocolate.write(0);
+      delay(400);
+      Chocolate(90);                          //Different from case 0 and case 1 because I used 360 degrees Servo motor and if I didn't do this, It will continues running in reverse 
+      break;
   }
-    Sugar.write(180);
-    delay(1000);
-    Sugar.write(90);
+  /*For additional features*/
+    //Sugar.write(180);
+    //delay(1000);
+    //Sugar.write(90);
 }
 //void handleRoot(){
   //String html = "<html><body><h1>Select Coffee</h1>";
