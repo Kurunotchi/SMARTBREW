@@ -13,7 +13,7 @@
 //IR Sersor_Cup_D6
 //Relay_Water_heater_D7
 //Stepper_Motor_D8_D9
-//Real Time Clock
+//Real_Time_Clock_DS3231SN
 
 //Robot Wheels Mechanism Section
 
