@@ -13,6 +13,7 @@
 //IR Sersor_Cup_D6
 //Relay_Water_heater_D7
 //Stepper_Motor_D8_D9
+//Real Time Clock
 
 //Robot Wheels Mechanism Section
 
