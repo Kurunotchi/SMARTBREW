@@ -49,7 +49,7 @@ const int Next = 3;   //Next Button
 const int Select = 4; //Next Button
 
 /*Variety of Coffee_LCD section*/
-const char* CoffeeVarieties[] = {"Black Coffee", "Caramel", "Chocolate"};
+const char* CoffeeVarieties[] = {"Black Coffee", "Chocolate", "Caramel"};
 int selectedIndex = 0;
 
 /*WiFi SSID and PASSWORD*/
